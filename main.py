@@ -1,3 +1,6 @@
+"""
+Author: Moiz Lakdawala
+"""
 import sys
 import json
 from datetime import datetime, timedelta, timezone
@@ -6,7 +9,7 @@ import os
 from configparser import ConfigParser
 
 config = ConfigParser()
-config.read(config_file)
+config.read(./key.cfg)
 PROTECT_INSTANCE = config.get('PROTECT_INSTANCE', 'PROTECT_INSTANCE')
 CLIENT_ID = config.get('CLIENT_ID', 'CLIENT_ID')
 PASSWORD = onfig.get('Password', 'PASSWORD')
@@ -18,6 +21,7 @@ JSON_OUTPUT_FILE = f"Jamf_Protect_Alerts_{datetime.utcnow().strftime('%Y-%m-%d')
 from datetime import datetime, timedelta, timezone
 
 def is_within_last_30_minutes(timestamp_str):
+    """Checks if the timestamp is within the last 30 minutes from the current time."""
     input_timestamp = datetime.fromisoformat(timestamp_str.replace("Z", "+00:00"))
     current_timestamp = datetime.now(timezone.utc)
     time_difference = current_timestamp - input_timestamp
@@ -96,6 +100,7 @@ LIST_ALERTS_QUERY = """
 
 def __main__():
     logfile = "/opt/wazuh_logging/jamf_pro/jamf_pro.log"
+     """Executes the log fetching and writing process."""
     if os.path.isfile(logfile):
         os.remove(logfile)
     if not set({MIN_SEVERITY, MAX_SEVERITY}).issubset(
@@ -141,11 +146,11 @@ def __main__():
 
                 else:
                     print("The given timestamp is not within the last 30 minutes.")
-                break
+                break # exit loop if alert is not within the last 30 minutes
             next_token = resp["data"]["listAlerts"]["pageInfo"]["next"]
             # results.extend(resp["data"]["listAlerts"]["items"])
             if next_token is None:
-                break
+                break # exit loop if there is no more data
             page_count += 1
 
 
