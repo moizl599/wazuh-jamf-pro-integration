@@ -3,12 +3,13 @@ import json
 from datetime import datetime, timedelta, timezone
 import requests
 import os
+from configparser import ConfigParser
 
-
-
+config = ConfigParser()
+config.read(config_file)
 PROTECT_INSTANCE = "workjam"
-CLIENT_ID = "<add client ID here>"
-PASSWORD = "<add password here>"
+CLIENT_ID = config.get('CLIENT_ID', 'key')
+PASSWORD = onfig.get('PASSWORD', 'Password')
 
 MIN_SEVERITY = "Low"  # Valid values: "Informational", "Low", "Medium", "High"
 MAX_SEVERITY = "High"  # Valid values: "Informational", "Low", "Medium", "High"
