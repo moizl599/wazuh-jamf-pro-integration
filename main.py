@@ -7,9 +7,9 @@ from configparser import ConfigParser
 
 config = ConfigParser()
 config.read(config_file)
-PROTECT_INSTANCE = "workjam"
-CLIENT_ID = config.get('CLIENT_ID', 'key')
-PASSWORD = onfig.get('PASSWORD', 'Password')
+PROTECT_INSTANCE = config.get('PROTECT_INSTANCE', 'PROTECT_INSTANCE')
+CLIENT_ID = config.get('CLIENT_ID', 'CLIENT_ID')
+PASSWORD = onfig.get('Password', 'PASSWORD')
 
 MIN_SEVERITY = "Low"  # Valid values: "Informational", "Low", "Medium", "High"
 MAX_SEVERITY = "High"  # Valid values: "Informational", "Low", "Medium", "High"
